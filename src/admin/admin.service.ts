@@ -67,4 +67,11 @@ export class AdminService {
   async getAllEvents() {
     return this.eventRepo.find({ relations: ['club'] });
   }
+
+  // 9️⃣ Delete an event
+  async deleteEvent(id: number) {
+    const event = await this.eventRepo.findOne({ where: { id } });
+    if (!event) throw new NotFoundException('Event not found');
+    return this.eventRepo.remove(event);
+  }
 }
