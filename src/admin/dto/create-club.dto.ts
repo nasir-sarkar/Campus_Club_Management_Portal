@@ -26,3 +26,5 @@ export function isCreateClubDto(object: any): object is CreateClubDto {
     );
 }
 
+
+
