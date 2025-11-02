@@ -4,7 +4,7 @@ import { MemberDto } from './dto/member.dto';
 import { ClubDto } from './dto/club.dto';
 import { EventDto } from './dto/event.dto';
 
-@Controller()
+@Controller('club_president')
 export class PresidentController {
   constructor(private readonly presidentService: PresidentService) {}
 
@@ -37,13 +37,7 @@ export class PresidentController {
   deleteEvent(@Param('eventId') eventId: string) {
     return this.presidentService.deleteEvent(eventId);
   }
-
-
-  @Get('view-report/:clubId')
-  viewReport(@Param('clubId') clubId: string, @Body() body: { clubReport: string }) {
-    return this.presidentService.viewReport(clubId, body.clubReport);
-  }
-  
+ 
 
   @Put('update-club/:clubId')
   updateClub(@Param('clubId') clubId: string, @Body() data: ClubDto) {
@@ -57,9 +51,15 @@ export class PresidentController {
   }
 
 
-  @Get('preview-future-events/:clubId')
-  previewFutureEvents(@Param('clubId') clubId: string) {
-    return this.presidentService.previewFutureEvents(clubId);
+  @Get('all-members')
+  getAllMembers() {
+    return this.presidentService.getAllMembers();
+  }
+
+
+  @Get('all-events')
+  getAllEvents() {
+    return this.presidentService.getAllEvents();
   }
 
 }
