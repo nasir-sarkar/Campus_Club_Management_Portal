@@ -8,8 +8,9 @@ export class PresidentService {
 
 
   addMember(member: MemberDto) {
-    const { name, username, id, role } = member;
-    return `Member Added Successfully! Name: ${name}, Username: ${username}, ID: ${id}, Role: ${role}`;
+    const { name, username, id, password, role } = member;
+    console.log(member.name);
+    return `Member Added Successfully! Name: ${name}, Username: ${username}, ID: ${id}, Password: ${password}, Role: ${role}`;
   }
 
 
@@ -51,8 +52,19 @@ export class PresidentService {
   }
 
 
-  previewFutureEvents(clubId: string) {
-    return `Future events for club ID: ${clubId}: Event 1, Event 2`;
+  getAllMembers() {
+    return [
+      { name: 'Nasir Sarkar', username: 'nasir12', id: '22-48370-3', role: 'Member' },
+      { name: 'Wahid Khan', username: 'wahid12', id: '22-48375-3', role: 'Volunteer' },
+    ];
+  }
+
+
+  getAllEvents() {
+    return [
+      { eventId: 'E001', eventName: 'Science Fair', eventcategory: 'Science', eventDate: '15-12-2025' },
+      { eventId: 'E003', eventName: 'Music Festival', eventcategory: 'Music', eventDate: '28-12-2025' },
+    ];
   }
 
 }
