@@ -56,8 +56,8 @@ export class PresidentService {
 
   getAllMembers() {
     return [
-      { name: 'Nasir Sarkar', username: 'nasir12', id: '22-48370-3', role: 'Member' },
-      { name: 'Wahid Khan', username: 'wahid12', id: '22-48375-3', role: 'Volunteer' },
+      { memberName: 'Nasir Sarkar', MemberUsername: 'nasir12', memberId: '22-48370-3', memberRole: 'Member' },
+      { memberName: 'Wahid Khan', memberUsername: 'wahid12', memberId: '22-48375-3', memberRole: 'Volunteer' },
     ];
   }
 
