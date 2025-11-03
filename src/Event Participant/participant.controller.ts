@@ -1,5 +1,5 @@
 //make controller for participant
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+/*import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { ParticipantService } from './participant.service';
 
 
@@ -14,4 +14,4 @@ export class ParticipantController {
 
 
   
-}
+}*/
