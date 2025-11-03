@@ -6,18 +6,11 @@ export class Event {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  title: string;
+  @Column() title: string;
+  @Column() description: string;
+  @Column() date: string;
+  @Column() venue: string;
 
-  @Column()
-  description: string;
-
-  @Column()
-  date: string;
-
-  @Column()
-  venue: string;
-
-  @ManyToOne(() => Club, (club) => club.id)
+  @ManyToOne(() => Club, (club) => club.events) // ← fix here
   club: Club;
 }
