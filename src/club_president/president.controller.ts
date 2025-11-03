@@ -46,8 +46,8 @@ export class PresidentController {
 
 
   @Patch('change-member-role/:memberId')
-  changeMemberRole(@Param('memberId') memberId: string, @Body() body: { role: string }) {
-    return this.presidentService.changeMemberRole(memberId, body.role);
+  changeMemberRole(@Param('memberId') memberId: string, @Body() body: { memberRole: string }) {
+    return this.presidentService.changeMemberRole(memberId, body.memberRole);
   }
 
 

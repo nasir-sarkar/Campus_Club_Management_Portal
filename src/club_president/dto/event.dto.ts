@@ -1,6 +1,6 @@
 export class EventDto {
   eventId: string;
   eventName: string;
-  eventcategory: string;
+  eventCategory: string;
   eventDate: string;
 }

@@ -8,9 +8,11 @@ export class PresidentService {
 
 
   addMember(member: MemberDto) {
-    const { name, username, id, password, role } = member;
-    console.log(member.name);
-    return `Member Added Successfully! Name: ${name}, Username: ${username}, ID: ${id}, Password: ${password}, Role: ${role}`;
+    const { memberName, memberUsername, memberId, memberPassword, memberRole } = member;
+    console.log(member.memberName);
+    
+    return `Member Added Successfully! Name: ${memberName}, Username: ${memberUsername}, 
+    ID: ${memberId}, Password: ${memberPassword}, Role: ${memberRole}`;
   }
 
 
@@ -20,14 +22,14 @@ export class PresidentService {
 
 
   createEvent(event: EventDto) {
-    const { eventId, eventName, eventcategory, eventDate } = event;
-    return `Event created Successfully! ID: ${eventId}, Name: ${eventName}, Category: ${eventcategory}, Date: ${eventDate}`;
+    const { eventId, eventName, eventCategory, eventDate } = event;
+    return `Event created Successfully! ID: ${eventId}, Name: ${eventName}, Category: ${eventCategory}, Date: ${eventDate}`;
   }
 
 
   updateEvent(eventId: string, event: EventDto) {
-    const { eventName, eventcategory, eventDate } = event;
-    return `Event updated Successfully! Updated ID: ${eventId}, Name: ${eventName}, Category: ${eventcategory}, Date: ${eventDate}`;
+    const { eventName, eventCategory, eventDate } = event;
+    return `Event updated Successfully! Updated ID: ${eventId}, Name: ${eventName}, Category: ${eventCategory}, Date: ${eventDate}`;
   }
 
 
@@ -47,8 +49,8 @@ export class PresidentService {
   }
 
 
-  changeMemberRole(memberId: string, role: string) {
-    return `Member role updated! ID: ${memberId}, New Role: ${role}`;
+  changeMemberRole(memberId: string, memberRole: string) {
+    return `Member role updated! ID: ${memberId}, New Role: ${memberRole}`;
   }
 
 
