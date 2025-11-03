@@ -1,7 +1,7 @@
 export class MemberDto {
-  name: string;
-  username: string;
-  id: string;
-  password: string;
-  role: string;
+  memberName: string;
+  memberUsername: string;
+  memberId: string;
+  memberPassword: string;
+  memberRole: string;
 }
