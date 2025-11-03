@@ -5,7 +5,7 @@ import { PresidentModule } from './club_president/president.module';
 import { MemberModule } from './member/member.module';
 
 @Module({
-  imports: [PresidentModule, MemberModule],
+  imports: [PresidentModule],
   controllers: [AppController],
   providers: [AppService],
 })
