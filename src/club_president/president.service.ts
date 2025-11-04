@@ -38,11 +38,6 @@ export class PresidentService {
   }
 
 
-  viewReport(clubId: string, clubReport: string) {
-  return `Report for club ID: ${clubId}, Report: ${clubReport}`;
-  }
-
-
   updateClub(clubId: string, data: ClubDto) {
     const { clubName, clubReport } = data;
     return `Club updated Successfully! Updated ID: ${clubId}, Name: ${clubName}, Report: ${clubReport}`;
@@ -68,5 +63,11 @@ export class PresidentService {
       { eventId: 'E003', eventName: 'Music Festival', eventcategory: 'Music', eventDate: '28-12-2025' },
     ];
   }
+
+
+  viewReport(clubId: string, clubReport: string) {
+    return `Report for Club ID: ${clubId}, Report: ${clubReport}`;
+  }
+
 
 }

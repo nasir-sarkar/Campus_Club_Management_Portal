@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Patch, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query } from '@nestjs/common';
 import { PresidentService } from './president.service';
 import { MemberDto } from './dto/member.dto';
 import { ClubDto } from './dto/club.dto';
@@ -61,5 +61,12 @@ export class PresidentController {
   getAllEvents() {
     return this.presidentService.getAllEvents();
   }
+
+
+  @Get('view-report')
+  viewReport(@Query('clubId') clubId: string, @Query('clubReport') clubReport: string) {
+    return this.presidentService.viewReport(clubId, clubReport);
+ }
+
 
 }
