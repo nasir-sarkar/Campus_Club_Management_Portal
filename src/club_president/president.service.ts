@@ -8,11 +8,11 @@ export class PresidentService {
 
 
   addMember(member: MemberDto) {
-    const { memberName, memberUsername, memberId, memberPassword, memberRole } = member;
+    const { memberName, memberUsername, memberId, memberPassword, memberRole, memberDOB,memberPhone } = member;
     console.log(member.memberName);
     
     return `Member Added Successfully! Name: ${memberName}, Username: ${memberUsername}, 
-    ID: ${memberId}, Password: ${memberPassword}, Role: ${memberRole}`;
+    ID: ${memberId}, Password: ${memberPassword}, Role: ${memberRole}, DOB: ${memberDOB}, Phone: ${memberPhone}`;
   }
 
 
@@ -63,11 +63,5 @@ export class PresidentService {
       { eventId: 'E003', eventName: 'Music Festival', eventcategory: 'Music', eventDate: '28-12-2025' },
     ];
   }
-
-
-  viewReport(clubId: string, clubReport: string) {
-    return `Report for Club ID: ${clubId}, Report: ${clubReport}`;
-  }
-
 
 }
