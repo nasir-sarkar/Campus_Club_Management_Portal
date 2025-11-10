@@ -11,8 +11,11 @@ export class PresidentService {
     const { memberName, memberUsername, memberId, memberPassword, memberRole, memberDOB,memberPhone } = member;
     console.log(member.memberName);
     
-    return `Member Added Successfully! Name: ${memberName}, Username: ${memberUsername}, 
-    ID: ${memberId}, Password: ${memberPassword}, Role: ${memberRole}, DOB: ${memberDOB}, Phone: ${memberPhone}`;
+    return {
+    message: 'Member added successfully!',
+    member: { name: memberName, username: memberUsername, id: memberId, password: memberPassword, 
+      role: memberRole, dob: memberDOB, phone: memberPhone}
+  };
   }
 
 
