@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query, UsePipes, ValidationPipe, UseInterceptors, UploadedFile} from '@nestjs/common';
 import { PresidentService } from './president.service';
 import { MemberDto } from './dto/member.dto';
 import { ClubDto } from './dto/club.dto';
 import { EventDto } from './dto/event.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { MulterError, diskStorage } from 'multer';
 
 @Controller('club_president')
 export class PresidentController {
@@ -10,6 +12,7 @@ export class PresidentController {
 
 
   @Post('add-member')
+  @UsePipes(new ValidationPipe())
   addMember(@Body() member: MemberDto) {
     return this.presidentService.addMember(member);
   }
@@ -21,13 +24,40 @@ export class PresidentController {
   }
 
 
+  @Post('upload-report')
+  @UseInterceptors(FileInterceptor('report-file',
+  { 
+    fileFilter: (req, file, cb) => {
+      if (file.originalname.match(/^.*\.(pdf)$/)) 
+        cb(null, true);
+      else {
+        cb(new MulterError('LIMIT_UNEXPECTED_FILE', 'report-file'), false);
+      }
+    },
+      limits: { fileSize: 4000000 },
+      storage: diskStorage({
+      destination: './uploads',
+       filename: function (req, file, cb) {
+       cb(null, Date.now() + file.originalname);
+       },
+     }),
+  }))
+
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Query('clubId') clubId: string) {
+    console.log(file);
+  }
+
+
+
   @Post('create-event')
+  @UsePipes(new ValidationPipe())
   createEvent(@Body() event: EventDto) {
     return this.presidentService.createEvent(event);
   }
 
 
   @Put('update-event/:eventId')
+  @UsePipes(new ValidationPipe())
   updateEvent(@Param('eventId') eventId: string, @Body() event: EventDto) {
     return this.presidentService.updateEvent(eventId, event);
   }
@@ -40,6 +70,7 @@ export class PresidentController {
  
 
   @Put('update-club/:clubId')
+  @UsePipes(new ValidationPipe())
   updateClub(@Param('clubId') clubId: string, @Body() data: ClubDto) {
     return this.presidentService.updateClub(clubId, data);
   }
@@ -62,11 +93,5 @@ export class PresidentController {
     return this.presidentService.getAllEvents();
   }
 
-
-  @Get('view-report')
-  viewReport(@Query('clubId') clubId: string, @Query('clubReport') clubReport: string) {
-    return this.presidentService.viewReport(clubId, clubReport);
- }
-
-
 }
+
