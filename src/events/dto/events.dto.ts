@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString, IsDateString } from 'class-validator';
 
-export class EventDto {
+export class EventsDto {
   
   @IsNotEmpty()
   @IsString()

@@ -10,7 +10,7 @@ import {
 
 import { Admin } from '../../admin/entities/admin.entity';
 import { PresidentEntity } from '../../club_president/entities/president.entity';
-import { EventsEntity } from '../../club_president/entities/events.entity';
+import { EventsEntity } from '../../events/entities/events.entity';
 
 
 
