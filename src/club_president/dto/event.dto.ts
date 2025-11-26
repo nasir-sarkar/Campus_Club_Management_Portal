@@ -1,15 +1,29 @@
-import { IsString, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsDateString } from 'class-validator';
 
 export class EventDto {
+  
+  @IsNotEmpty()
   @IsString()
-  eventId: string;
+  e_name: string;
 
+  @IsNotEmpty()
   @IsString()
-  eventName: string;
+  e_contact: string;
 
+  @IsNotEmpty()
+  @IsDateString()
+  event_date: string;
+
+  @IsOptional()
   @IsString()
-  eventCategory: string;
+  e_category?: string;
 
-  @IsDateString({}, { message: 'Invalid date format.' })
-  eventDate: string;
+  @IsOptional()
+  @IsString()
+  e_description?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  club_id: string;
 }
+
