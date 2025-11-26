@@ -2,8 +2,8 @@ import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query, UsePipes
 import { PresidentService } from './president.service';
 import { MemberDto } from './dto/member.dto';
 import { ClubDto } from './dto/club.dto';
-import { EventDto } from './dto/event.dto';
-import { EventsEntity } from './entities/events.entity';
+import { EventsDto } from '../events/dto/events.dto';
+import { EventsEntity } from '../events/entities/events.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterError, diskStorage } from 'multer';
 import { ClubInfo } from '../club-info/entitites/club-info.entity';

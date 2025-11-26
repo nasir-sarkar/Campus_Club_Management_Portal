@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PresidentController } from './president.controller';
 import { PresidentService } from './president.service';
 import { PresidentEntity } from './entities/president.entity';
-import { EventsEntity } from './entities/events.entity';
+import { EventsEntity } from '../events/entities/events.entity';
 import { ClubInfo } from '../club-info/entitites/club-info.entity'; 
 import { ManyToOne, JoinColumn } from 'typeorm';
 import { Admin } from '../admin/entities/admin.entity';

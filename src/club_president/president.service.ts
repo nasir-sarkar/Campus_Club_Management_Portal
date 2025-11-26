@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { MemberDto } from './dto/member.dto';
 import { ClubDto } from './dto/club.dto';
-import { EventDto } from './dto/event.dto';
+import { EventsDto } from '../events/dto/events.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like, MoreThan } from 'typeorm';
-import { EventsEntity } from './entities/events.entity';
+import { EventsEntity } from '../events/entities/events.entity';
 import { ClubInfo } from '../club-info/entitites/club-info.entity';
 
 @Injectable()
