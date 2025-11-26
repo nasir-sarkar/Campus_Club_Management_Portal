@@ -3,95 +3,38 @@ import { PresidentService } from './president.service';
 import { MemberDto } from './dto/member.dto';
 import { ClubDto } from './dto/club.dto';
 import { EventDto } from './dto/event.dto';
+import { EventsEntity } from './entities/events.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterError, diskStorage } from 'multer';
+import { ClubInfo } from '../club-info/entitites/club-info.entity';
 
 @Controller('club_president')
 export class PresidentController {
   constructor(private readonly presidentService: PresidentService) {}
 
 
-  @Post('add-member')
-  @UsePipes(new ValidationPipe())
-  addMember(@Body() member: MemberDto) {
-    return this.presidentService.addMember(member);
+  @Post('add-event')
+  addEvent(@Body() event: EventsEntity) {
+    return this.presidentService.addEvent(event);
   }
 
 
-  @Delete('delete-member/:memberId')
-  deleteMember(@Param('memberId') memberId: string) {
-    return this.presidentService.deleteMember(memberId);
-  }
-
-
-  @Post('upload-report')
-  @UseInterceptors(FileInterceptor('report-file',
-  { 
-    fileFilter: (req, file, cb) => {
-      if (file.originalname.match(/^.*\.(pdf)$/)) 
-        cb(null, true);
-      else {
-        cb(new MulterError('LIMIT_UNEXPECTED_FILE', 'report-file'), false);
-      }
-    },
-      limits: { fileSize: 4000000 },
-      storage: diskStorage({
-      destination: './uploads',
-       filename: function (req, file, cb) {
-       cb(null, Date.now() + file.originalname);
-       },
-     }),
-  }))
-
-  uploadFile(@UploadedFile() file: Express.Multer.File, @Query('clubId') clubId: string) {
-    console.log(file);
-  }
-
-
-
-  @Post('create-event')
-  @UsePipes(new ValidationPipe())
-  createEvent(@Body() event: EventDto) {
-    return this.presidentService.createEvent(event);
-  }
-
-
-  @Put('update-event/:eventId')
-  @UsePipes(new ValidationPipe())
-  updateEvent(@Param('eventId') eventId: string, @Body() event: EventDto) {
-    return this.presidentService.updateEvent(eventId, event);
-  }
-
-
-  @Delete('delete-event/:eventId')
-  deleteEvent(@Param('eventId') eventId: string) {
-    return this.presidentService.deleteEvent(eventId);
-  }
- 
-
-  @Put('update-club/:clubId')
-  @UsePipes(new ValidationPipe())
-  updateClub(@Param('clubId') clubId: string, @Body() data: ClubDto) {
-    return this.presidentService.updateClub(clubId, data);
-  }
-
-
-  @Patch('change-member-role/:memberId')
-  changeMemberRole(@Param('memberId') memberId: string, @Body() body: { memberRole: string }) {
-    return this.presidentService.changeMemberRole(memberId, body.memberRole);
-  }
-
-
-  @Get('all-members')
-  getAllMembers() {
-    return this.presidentService.getAllMembers();
-  }
-
-
-  @Get('all-events')
+  @Get('get-events')
   getAllEvents() {
+    console.log('GET /club_president/get-events called');
     return this.presidentService.getAllEvents();
   }
 
+
+  @Patch('update-event/:e_id')
+  updateEvent(@Param('e_id') e_id: string, @Body() updatedEvent: EventsEntity) {
+    return this.presidentService.updateEvent(e_id, updatedEvent);
+  }
+
+
+  @Delete('delete-event/:e_id')
+  deleteEvent(@Param('e_id') e_id: string) {
+    return this.presidentService.deleteEvent(e_id);
+  }
 }
 

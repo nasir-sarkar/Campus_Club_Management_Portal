@@ -3,11 +3,16 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToMany,
   JoinColumn,
   CreateDateColumn,
 } from 'typeorm';
 
 import { Admin } from '../../admin/entities/admin.entity';
+import { PresidentEntity } from '../../club_president/entities/president.entity';
+import { EventsEntity } from '../../club_president/entities/events.entity';
+
+
 
 @Entity('club_info')
 export class ClubInfo {
@@ -38,4 +43,12 @@ export class ClubInfo {
 
   @Column({ nullable: true })
   club_category: string;
+
+
+  @OneToMany(() => PresidentEntity, (president) => president.club)
+  presidents: PresidentEntity[];
+
+  @OneToMany(() => EventsEntity, (event) => event.club)
+  events: EventsEntity[];
+
 }

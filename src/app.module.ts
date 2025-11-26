@@ -1,18 +1,14 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { ConfigModule } from '@nestjs/config';
-
 import { AdminModule } from './admin/admin.module';
-
 import { ClubInfoModule } from './club-info/club-info.module';
-
 import { AuthModule } from './auth/auth.module';
+import { PresidentModule } from './club_president/president.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env',}),
 
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,10 +22,9 @@ import { AuthModule } from './auth/auth.module';
     }),
 
     AdminModule,
-
     ClubInfoModule,
-
     AuthModule,
+    PresidentModule,
   ],
 })
 export class AppModule {}
