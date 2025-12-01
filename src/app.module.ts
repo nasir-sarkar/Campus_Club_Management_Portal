@@ -6,6 +6,7 @@ import { ClubInfoModule } from './club-info/club-info.module';
 import { AuthModule } from './auth/auth.module';
 import { PresidentModule } from './club_president/president.module';
 import { MemberModule } from './member/member.module';
+import { PresidentAuthModule } from './president_auth/auth.module';
 
 @Module({
   imports: [
@@ -26,7 +27,9 @@ import { MemberModule } from './member/member.module';
     ClubInfoModule,
     AuthModule,
     PresidentModule,
+    PresidentAuthModule,
     MemberModule,
+
   ],
 })
 export class AppModule {}
