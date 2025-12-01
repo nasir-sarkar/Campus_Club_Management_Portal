@@ -12,7 +12,6 @@ import {
 import { Admin } from '../../admin/entities/admin.entity';
 import { PresidentEntity } from '../../club_president/entities/president.entity';
 import { EventsEntity } from '../../events/entities/events.entity';
-import { ClubReportEntity } from '../../report/entities/club_report.entity';
 import { MemberEntity } from '../../member/entities/member.entity';
 
 
@@ -52,10 +51,6 @@ export class ClubInfo {
 
   @OneToMany(() => EventsEntity, (event) => event.club)
   events: EventsEntity[];
-
-  @OneToMany(() => ClubReportEntity, (report) => report.club)
-  reports: ClubReportEntity[];
-
 
   @OneToMany(() => MemberEntity, (member) => member.club)
   members: MemberEntity[];

@@ -2,9 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn
 import { ClubInfo } from '../../club-info/entitites/club-info.entity';
 import { EventsEntity } from '../../events/entities/events.entity';
 import { MemberEntity } from '../../member/entities/member.entity';
-import { EventReportEntity } from '../../report/entities/event_report.entity';
-import { ClubReportEntity } from '../../report/entities/club_report.entity';
 import { IsNotEmpty, IsEmail, Matches, MinLength, IsOptional, Validate, } from 'class-validator';
+import { PresidentProfileEntity } from '../../club_president/entities/president_profile.entity';
 
 
 @Entity('presidents')
@@ -68,11 +67,7 @@ export class PresidentEntity {
   @OneToMany(() => MemberEntity, (member) => member.president)
   members: MemberEntity[];
 
-
-  @OneToOne(() => EventReportEntity, (report) => report.president)
-  eventReport: EventReportEntity;
-
-
-  @OneToMany(() => ClubReportEntity, (report) => report.president)
-  reports: ClubReportEntity[];
+  
+  @OneToOne(() => PresidentProfileEntity, (profile) => profile.president, { cascade: true })
+  profile: PresidentProfileEntity;
 }

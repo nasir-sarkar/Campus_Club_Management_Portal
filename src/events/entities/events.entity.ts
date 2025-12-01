@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn, CreateDateColumn, } from 'typeorm';
 import { ClubInfo } from '../../club-info/entitites/club-info.entity';
 import { PresidentEntity } from '../../club_president/entities/president.entity';
-import { EventReportEntity } from '../../report/entities/event_report.entity';
 import { IsNotEmpty, Matches, IsOptional } from 'class-validator';
 
 @Entity('events')
@@ -60,9 +59,5 @@ export class EventsEntity {
   @ManyToOne(() => PresidentEntity, (president) => president.events, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'p_id' })
   president: PresidentEntity;
-
-  
-  @OneToOne(() => EventReportEntity, (report) => report.event)
-  report: EventReportEntity;
 
 }
