@@ -1,67 +1,62 @@
 import {
     Controller,
     Post,
+    Get,
     Patch,
     Delete,
-    Get,
     Param,
     Body,
     UseGuards,
-    ParseIntPipe,
 } from '@nestjs/common';
+
 import { AdminService } from './admin.service';
-import { CreateClubDto } from './dto/create-club.dto';
-import { UpdateClubDto } from './dto/update-club.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Roles } from 'src/auth/roles.decorator';
 
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('admin')
-@Controller('admin')
+import { CreateAdminDto } from './dto/create-admin.dto';
+
+import { UpdateAdminDto } from './dto/update-admin.dto';
+
+import { JwtGuard } from '../auth/jwt.guard';
+
+import { RolesGuard } from '../auth/roles.guard';
+
+import { Roles } from '../auth/roles.decorator';
+
+import { Role } from '../auth/roles.enum';
+
+@Controller('admins')
 export class AdminController {
-    constructor(private readonly adminService: AdminService) { }
+    constructor(private adminService: AdminService) { }
 
-    @Post('create-club')
-    createClub(@Body() dto: CreateClubDto) {
-        return this.adminService.createClub(dto);
+    @Post()
+    create(@Body() dto: CreateAdminDto) {
+        return this.adminService.create(dto);
     }
 
-    @Patch('update-club/:id')
-    updateClub(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateClubDto) {
-        return this.adminService.updateClub(id, dto);
+    @UseGuards(JwtGuard, RolesGuard)
+    @Roles(Role.ADMIN, Role.SUPER_ADMIN)
+    @Get()
+    findAll() {
+        return this.adminService.findAll();
     }
 
-    @Delete('delete-club/:id')
-    deleteClub(@Param('id', ParseIntPipe) id: number) {
-        return this.adminService.deleteClub(id);
+    @UseGuards(JwtGuard, RolesGuard)
+    @Roles(Role.ADMIN, Role.SUPER_ADMIN)
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.adminService.findOne(id);
     }
 
-    @Patch('assign-president/:clubId/:userId')
-    assignPresident(
-        @Param('clubId', ParseIntPipe) clubId: number,
-        @Param('userId', ParseIntPipe) userId: number,
-    ) {
-        return this.adminService.assignPresident(clubId, userId);
+    @UseGuards(JwtGuard, RolesGuard)
+    @Roles(Role.SUPER_ADMIN)
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() dto: UpdateAdminDto) {
+        return this.adminService.update(id, dto);
     }
 
-    @Get('clubs')
-    getClubs() {
-        return this.adminService.getAllClubs();
-    }
-
-    @Get('users')
-    getUsers() {
-        return this.adminService.getAllUsers();
-    }
-
-    @Get('reports')
-    getReports() {
-        return this.adminService.getReports();
-    }
-
-    @Get('events')
-    getEvents() {
-        return this.adminService.getAllEvents();
+    @UseGuards(JwtGuard, RolesGuard)
+    @Roles(Role.SUPER_ADMIN)
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.adminService.remove(id);
     }
 }
